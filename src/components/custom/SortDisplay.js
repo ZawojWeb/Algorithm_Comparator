@@ -1,10 +1,11 @@
-import * as React from 'react';
+import {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import { Box, Button,Paper } from '@mui/material';
 
-export default function SortDispaly({sortName,buttonShow}) {
-    const testArray =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+export default function SortDispaly({sortName,buttonShow,array}) {
+
+    
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -39,15 +40,13 @@ export default function SortDispaly({sortName,buttonShow}) {
                         </Typography>
                     </Box>
                     <Box>       
-                    <Typography sx={{ fontSize: 26,wordWrap: "break-word", textAlign: "center", padding: "10px" }} color="text.primary" gutterBottom>
-                        [{" "}               
-                        {testArray.map((ele) => (ele +  " "))}
-                        {" "}]
+                    <Typography sx={{ fontSize: 20,wordWrap: "break-word", textAlign: "center", padding: "10px" }} color="text.primary" gutterBottom>
+                        {array != null && array.map((ele) => (ele +  " "))}
                         </Typography>
                     </Box>
                     </Paper>
                 </Box>
-            {(buttonShow &&<Button
+            {(buttonShow && array.length <= 50 && <Button
               size="small"
               variant="contained"
             >

@@ -25,21 +25,6 @@ const Home = () => {
       </Head>
       <main>
           <BasicTabs/>
-          <Box
-            sx={{
-              display:"flex",
-              justifyContent: "center", 
-              alignItems: "center"
-            }}
-          >
-            <Button
-              size="small"
-              variant="contained"
-            >
-              SOURCE CODE
-            </Button>
-           
-          </Box>
       </main>
     </>
   );

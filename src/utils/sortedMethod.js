@@ -1,14 +1,15 @@
-export const insertion_Sort = (array) => {
-    for (let i = 1; i < array.length; i++) {
+export const insertionSort = (array) => {
+    const list = [...array]
+    for (let i = 1; i < list.length; i++) {
       let j = i - 1
-      let temp = array[i]
-      while (j >= 0 && array[j] > temp) {
-        array[j + 1] = array[j]
+      let temp = list[i]
+      while (j >= 0 && list[j] > temp) {
+        list[j + 1] = list[j]
         j--
       }
-      array[j+1] = temp
+      list[j+1] = temp
     }
-    return array
+    return list
 }
 
 export const quickSort = (array) => {
