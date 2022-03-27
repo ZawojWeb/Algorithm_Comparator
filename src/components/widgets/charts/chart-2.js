@@ -14,14 +14,22 @@ const randomColor = () => {
   return color;
 };
 
-export const Chart2 = ({data,titleChart,whichAlgo}) => {
+export const Chart2 = ({data,titleChart,whichAlgo,typeOfChart}) => {
   const theme = useTheme();
   const chartSeries = [];
   let colors = [];
 
-  for (let i = 0; i < whichAlgo.length; i++) {
-    if(whichAlgo[i] ==true){
+  if(typeOfChart == 5 || typeOfChart == 6){  
+    for (let i = 0; i < 6; i++) {
       colors.push(randomColor());
+    }
+    colors.push('#ffffff');
+
+  }else{
+    for (let i = 0; i < whichAlgo.length; i++) {
+      if(whichAlgo[i] ==true){
+        colors.push(randomColor());
+      }
     }
   }
 
@@ -114,40 +122,76 @@ export const Chart2 = ({data,titleChart,whichAlgo}) => {
     
   };
 
-  if(whichAlgo[0] ==true){
-    chartSeries.push({
-      data: {...data[0]}[0],
-      name: 'Qucik Sort'
-    })
+  if(typeOfChart == 5 || typeOfChart == 6){
+   
+    chartSeries.push(
+      {
+        data: {...data[0]}[0],
+        name: 'Qucik Sort RAND'
+      },
+      {
+        data: {...data[1]}[0],
+        name: 'Qucik Sort ASC'
+      },
+      {
+        data: {...data[2]}[0],
+        name: 'Qucik Sort DESC'
+      },
+      {
+        data: {...data[3]}[0],
+        name: 'Dual Pivot Quick Sort RAND'
+      },
+      {
+        data: {...data[4]}[0],
+        name: 'Dual Pivot Quick Sort ASC'
+      },
+      {
+        data: {...data[5]}[0],
+        name: 'Dual Pivot Quick Sort DESC'
+      },
+      {
+        data: {...data[6]}[0],
+        name: 'nln(n)'
+      }
+    )
+  }else {
+    if(whichAlgo[0] ==true){
+      chartSeries.push({
+        data: {...data[0]}[0],
+        name: 'Qucik Sort'
+      })
+    }
+  
+    if(whichAlgo[1] ==true){
+      chartSeries.push({
+        data: {...data[1]}[0],
+        name: 'Merage Sort'
+      })
+    }
+  
+    if(whichAlgo[2] ==true){
+      chartSeries.push({
+        data: {...data[2]}[0],
+        name: 'Insertion Sort'
+      })
+    }
+  
+    if(whichAlgo[3] ==true){
+      chartSeries.push({
+        data: {...data[3]}[0],
+        name: 'Dual Pivot Quick Sort'
+      })
+    }
+  
+    if(whichAlgo[4] ==true){
+      chartSeries.push({
+        data: {...data[4]}[0],
+        name: 'Hybrid'
+      })
+    }
   }
 
-  if(whichAlgo[1] ==true){
-    chartSeries.push({
-      data: {...data[1]}[0],
-      name: 'Merage Sort'
-    })
-  }
-
-  if(whichAlgo[2] ==true){
-    chartSeries.push({
-      data: {...data[2]}[0],
-      name: 'Insertion Sort'
-    })
-  }
-
-  if(whichAlgo[3] ==true){
-    chartSeries.push({
-      data: {...data[3]}[0],
-      name: 'Dual Pivot Quick Sort'
-    })
-  }
-
-  if(whichAlgo[4] ==true){
-    chartSeries.push({
-      data: {...data[4]}[0],
-      name: 'Hybrid'
-    })
-  }
+  
 
   return (
     <Box

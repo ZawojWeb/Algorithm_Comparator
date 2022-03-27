@@ -28,7 +28,9 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
     };
 
     useEffect(() => {
-       if(howManyRepeats > 25){
+        if(typeOfChart == 5 || typeOfChart == 6){
+            setWhichAlgo([false,false,false,false,false])
+        }else if(howManyRepeats > 25){
             setWhichAlgo([whichAlgo[0] ,whichAlgo[1], false, whichAlgo[3], whichAlgo[4]]);
         } 
     },[howManyRepeats,typeOfChart])
@@ -88,7 +90,8 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
                 <MenuItem value={2}>średnią liczbę przestawień kluczy (s) w zależności od n</MenuItem>
                 <MenuItem value={3}>iloraz c/n w zależności od n</MenuItem>
                 <MenuItem value={4}>iloraz s/n w zależności od n.</MenuItem>
-                <MenuItem value={5}>quickSort vs dualPivotQuicksort</MenuItem>
+                <MenuItem value={5}>quickSort vs dualPivotQuicksort SWAPS</MenuItem>
+                <MenuItem value={6}>quickSort vs dualPivotQuicksort COMPARITION</MenuItem>
             </Select>
             </Grid>
               <Grid
@@ -104,30 +107,30 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
                         checked={whichAlgo[0] && whichAlgo[1] && whichAlgo[2] && whichAlgo[3] && whichAlgo[4]}
                         indeterminate={whichAlgo[0] !== whichAlgo[1] && whichAlgo[1] !== whichAlgo[2]}
                         onChange={handleChange1}
-                        disabled={howManyRepeats > 25}
+                        disabled={howManyRepeats > 25 || typeOfChart == 5 || typeOfChart == 6}
                     />
                     }
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
                     <FormControlLabel
                         label="Quick Sort"
-                        control={<Checkbox checked={whichAlgo[0]} onChange={handleChange2} />}
+                        control={<Checkbox checked={whichAlgo[0]} onChange={handleChange2} disabled={typeOfChart == 5 || typeOfChart == 6}/>}
                     />
                     <FormControlLabel
                         label="Merege Sort"
-                        control={<Checkbox checked={whichAlgo[1]} onChange={handleChange3} />}
+                        control={<Checkbox checked={whichAlgo[1]} onChange={handleChange3} disabled={typeOfChart == 5 || typeOfChart == 6}/>}
                     />
                     <FormControlLabel
                         label="Insert Sort"
-                        control={<Checkbox checked={whichAlgo[2]} onChange={handleChange4} disabled={howManyRepeats > 25} />}
+                        control={<Checkbox checked={whichAlgo[2]} onChange={handleChange4} disabled={howManyRepeats > 25 || typeOfChart == 5 || typeOfChart == 6} />}
                     />
                     <FormControlLabel
                         label="Dual Pivot Quick Sort"
-                        control={<Checkbox checked={whichAlgo[3]} onChange={handleChange5} />}
+                        control={<Checkbox checked={whichAlgo[3]} onChange={handleChange5} disabled={typeOfChart == 5 || typeOfChart == 6}/>}
                     />
                     <FormControlLabel
                         label="Hybrid"
-                        control={<Checkbox checked={whichAlgo[4]} onChange={handleChange6}/>}
+                        control={<Checkbox checked={whichAlgo[4]} onChange={handleChange6}disabled={typeOfChart == 5 || typeOfChart == 6}/>}
                     />
                  </Box>
               </Grid>

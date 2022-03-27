@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { Box, Button,Paper,TextField } from '@mui/material';
 import {Chart2} from '../widgets/charts/chart-2'
 import {ChartForm} from './ChartForm'
-import {avgComparitions,avgSwaps,avgComparitionsDiv,avgSwapsDiv} from '../../utils/chartDataGenerator'
+import {avgComparitions,avgSwaps,avgComparitionsDiv,avgSwapsDiv,quickSortVsDualPitovQuickSort} from '../../utils/chartDataGenerator'
 
 export default function ChartDisaply() {
   const [howManyRepeats, setHowManyRepeats] = useState(1)
@@ -32,7 +32,10 @@ export default function ChartDisaply() {
         SetData(avgSwapsDiv(whichAlgo, howManyRepeats));
         break;
       case 5:
-        console.log('5')
+        SetData(quickSortVsDualPitovQuickSort(howManyRepeats,1));
+        break;
+      case 6:
+        SetData(quickSortVsDualPitovQuickSort(howManyRepeats,2));
         break;
       default:
         break;
@@ -51,6 +54,12 @@ export default function ChartDisaply() {
       case 4:
         setTitle('iloraz s/n w zależności od n')
         break;
+      case 5:
+        setTitle(`quickSort vs dualPivotQuicksort for SWAPS`)
+        break;
+      case 6:
+        setTitle(`quickSort vs dualPivotQuicksort for COMPARITION`)
+        break;
       default:
         break;
     }
@@ -62,7 +71,7 @@ export default function ChartDisaply() {
       <Box >
       <ChartForm howManyRepeats={howManyRepeats} setHowManyRepeats={setHowManyRepeats} typeOfChart={typeOfChart} setTypeOfChart={setTypeOfChart} whichAlgo={whichAlgo} setWhichAlgo={setWhichAlgo} generateChart={generateChart}/>
       </Box>
-     {data.length > 0 &&  <Chart2 data={data} titleChart={title} whichAlgo={whichAlgo}/>}
+     {data.length > 0 &&  <Chart2 data={data} titleChart={title} whichAlgo={whichAlgo} typeOfChart={typeOfChart}/>}
     </Box>
   );
 }
