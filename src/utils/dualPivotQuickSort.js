@@ -11,7 +11,6 @@ export const dualPivotQuickSortWrap = (arr) => {
         console.log("err" );
       }
     }
-
     return list;
   }
 
@@ -30,7 +29,7 @@ export const dualPivotQuickSortWrap = (arr) => {
         quickComparitionCountDQ++;
         swap(arr, i, storeIndex);
         storeIndex++;
-      } else if (arr[i] > pivot2) {
+      } else if (arr[i] < pivot2) {
         quickComparitionCountDQ++;
         swap(arr, i, storeIndex + 1);
         storeIndex++;
@@ -45,11 +44,7 @@ export const dualPivotQuickSortWrap = (arr) => {
     }
     let pivot1 = arr[left];
     let pivot2 = arr[right];
-    if (pivot1 > pivot2) {
-      swap(arr, left, right);
-      pivot1 = arr[left];
-      pivot2 = arr[right];
-    }
+    
     let storeIndex = partition(arr, left, right, pivot1, pivot2);
     dualPivotQuicksort(arr, left, storeIndex - 1);
     dualPivotQuicksort(arr, storeIndex + 1, right);

@@ -1,4 +1,4 @@
-import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSort,stepsForQuick,quickSwapsCount,meregeSwapsCount,insertSwapsCount,quickComparitionCount,meregeComparitionCount,insertComparitionCount } from "./sortedMethod";
+import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSortWrap,stepsForQuick,quickSwapsCount,meregeSwapsCount,insertSwapsCount,quickComparitionCount,meregeComparitionCount,insertComparitionCount } from "./sortedMethod";
 import {dualPivotQuickSortWrap, quickComparitionCountDQ, quickSwapsCountDQ,reset} from "./dualPivotQuickSort";
 import {randomGenerator,ascGenerator,descGenerator} from "./numGenerator";
 
@@ -35,7 +35,7 @@ export const avgComparitions = (whichAlgo,howManyRepeats) => {
             let generateStartArray = randomGenerator(index)
             avg = 0;
             for (let j = 0; j < howManyRepeats; j++) {
-                quickSort(generateStartArray)
+                quickSortWrap(generateStartArray)
                 avg += quickComparitionCount;
             }
             avg = avg / howManyRepeats;
@@ -103,7 +103,7 @@ export const avgSwaps = (whichAlgo,howManyRepeats) => {
             let generateStartArray = randomGenerator(index)
             avg = 0;
             for (let j = 0; j < howManyRepeats; j++) {
-                quickSort(generateStartArray)
+                quickSortWrap(generateStartArray)
                 avg += quickSwapsCount;
             }
             avg = avg / howManyRepeats;
@@ -173,7 +173,7 @@ export const avgComparitionsDiv = (whichAlgo,howManyRepeats) => {
             let generateStartArray = randomGenerator(index)
             avg = 0;
             for (let j = 0; j < howManyRepeats; j++) {
-                quickSort(generateStartArray)
+                quickSortWrap(generateStartArray)
                 avg += quickComparitionCount;
             }
             avg = (avg / howManyRepeats)/index;
@@ -243,7 +243,7 @@ export const avgSwapsDiv = (whichAlgo,howManyRepeats) => {
             let generateStartArray = randomGenerator(index)
             avg = 0;
             for (let j = 0; j < howManyRepeats; j++) {
-                quickSort(generateStartArray)
+                quickSortWrap(generateStartArray)
                 avg += quickSwapsCount;
             }
             avg = (avg / howManyRepeats)/index;
@@ -317,27 +317,28 @@ export const quickSortVsDualPitovQuickSort = (howManyRepeats,option) =>{
      let avgQDASC = 0;
      let avgQDDESC = 0;
 
-     for (let index = 100; index <= 1000; index+=100) {
+     for (let index = 100; index <= 1000; index+=100) {       
         let generateStartArrayRAND = randomGenerator(index)
         let generateStartArrayASC = ascGenerator(index)
         let generateStartArrayDESC = descGenerator(index)
-        nlnn.push(index * Math.log(index))
+        nlnn.push(index * Math.log(index) * 5)
+        
         avgQRAND = 0;
         avgQASC = 0;
         avgQDESC = 0;
         avgQDRAND = 0;
         avgQDASC = 0;
         avgQDDESC = 0;
-        
+
         if(option ==1 ){
             for (let j = 0; j < howManyRepeats; j++) {
-                quickSort(generateStartArrayRAND)
+                quickSortWrap(generateStartArrayRAND)
                 avgQRAND += quickSwapsCount;
     
-                quickSort(generateStartArrayASC)
+                quickSortWrap(generateStartArrayASC)
                 avgQASC += quickSwapsCount;
     
-                quickSort(generateStartArrayDESC)
+                quickSortWrap(generateStartArrayDESC)
                 avgQDESC += quickSwapsCount;
     
                 dualPivotQuickSortWrap(generateStartArrayRAND)
@@ -348,17 +349,18 @@ export const quickSortVsDualPitovQuickSort = (howManyRepeats,option) =>{
     
                 dualPivotQuickSortWrap(generateStartArrayDESC)
                 avgQDDESC += quickSwapsCountDQ;
-    
+
+                
             }
         }else if(option ==2){
             for (let j = 0; j < howManyRepeats; j++) {
-                quickSort(generateStartArrayRAND)
+                quickSortWrap(generateStartArrayRAND)
                 avgQRAND += quickComparitionCount;
     
-                quickSort(generateStartArrayASC)
+                quickSortWrap(generateStartArrayASC)
                 avgQASC += quickComparitionCount;
     
-                quickSort(generateStartArrayDESC)
+                quickSortWrap(generateStartArrayDESC)
                 avgQDESC += quickComparitionCount;
     
                 dualPivotQuickSortWrap(generateStartArrayRAND)
@@ -369,16 +371,17 @@ export const quickSortVsDualPitovQuickSort = (howManyRepeats,option) =>{
     
                 dualPivotQuickSortWrap(generateStartArrayDESC)
                 avgQDDESC += quickComparitionCountDQ;
+
     
             }
         }
         
-        avgQRAND = (avgQRAND / howManyRepeats)/index;
-        avgQASC = (avgQASC / howManyRepeats)/index;
-        avgQDESC = (avgQDESC / howManyRepeats)/index;
-        avgQDRAND = (avgQDRAND / howManyRepeats)/index;
-        avgQDASC = (avgQDASC / howManyRepeats)/index;
-        avgQDDESC = (avgQDDESC / howManyRepeats)/index;
+        avgQRAND = (avgQRAND / howManyRepeats);
+        avgQASC = (avgQASC / howManyRepeats);
+        avgQDESC = (avgQDESC / howManyRepeats);
+        avgQDRAND = (avgQDRAND / howManyRepeats);
+        avgQDASC = (avgQDASC / howManyRepeats);
+        avgQDDESC = (avgQDDESC / howManyRepeats);
 
         quickSortAvaragesRAND.push(avgQRAND)
         quickSortAvaragesASC.push(avgQASC)
@@ -386,11 +389,14 @@ export const quickSortVsDualPitovQuickSort = (howManyRepeats,option) =>{
         dualQuickSortAvaragesRAND.push(avgQDRAND)
         dualQuickSortAvaragesASC.push(avgQDASC)
         dualQuickSortAvaragesDESC.push(avgQDDESC)
+
+        
+        resetArrays()
+        reset()
     }
-    resetArrays()
-    reset()
     return [[quickSortAvaragesRAND], [quickSortAvaragesASC],[quickSortAvaragesDESC],[dualQuickSortAvaragesRAND],[dualQuickSortAvaragesASC], [dualQuickSortAvaragesDESC],[nlnn]]
 }
+
 
 
 

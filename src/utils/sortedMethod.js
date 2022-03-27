@@ -77,38 +77,65 @@ const mergeArr = (leftArr, rightArr) =>{
   return [...output, ...leftArr.slice(leftIndex), ...rightArr.slice(rightIndex)]
 }
 
-export const quickSort = (arr) => {
-  let tempArr = [...arr]
-  
-  if (arr.length <= 1) { 
-    return arr;
-	} 
-  
-	let left = [];
-	let right = [];
-	let newArray = [];
-	let pivot = tempArr.pop();
-	let length = tempArr.length;
-	for (let i = 0; i < length; i++) {
-    quickComparitionCount++;
-		if (tempArr[i] <= pivot) {
-			left.push(tempArr[i]);
-		} else {
-			right.push(tempArr[i]);
-		}
-	}
 
-  const leftEl = quickSort(left)
-  const rightEl = quickSort(right)
+//Quick Sort
+export const quickSortWrap = (arr) => { 
+  const list = [...arr]
 
-  const newArrayCheck = leftEl.concat(rightEl);
-    for (let i = 0; i < arr.length; i++) {
-      if(arr[i] != newArrayCheck[i] && arr[i] != pivot ) {quickSwapsCount++} //Bcs pivot is not in newArray
+  try {
+    quickSort(list, 0, list.length - 1);
+  }catch(e){
+    if ( e instanceof RangeError) {
+      console.log("err" );
+    }
   }
 
-  // Steps
-  stepsForQuick.push([...leftEl, pivot, ...rightEl])
-	return newArray.concat(leftEl, pivot,rightEl);
+  return list;
+}
+
+const quickSort = (arr,left,right) => {
+
+  let index;
+  if (arr.length > 1) {
+    index = partition(arr, left, right);
+    if (left < index - 1) {
+      quickSort(arr, left, index - 1);
+    }
+    if (index < right) {
+      quickSort(arr, index, right);
+    }
+  }
+  return arr;
+}
+
+
+const partition = (arr, left, right) => {
+  let pivot = arr[Math.floor((right + left) / 2)];
+  let i = left;
+  let j = right;
+  while (i <= j) {
+    while (arr[i] < pivot) {
+      quickComparitionCount++;
+      i++;
+    }
+    while (arr[j] > pivot) {
+      quickComparitionCount++;
+      j--;
+    }
+    if (i <= j) {
+      swap(arr, i, j);
+      i++;
+      j--;
+    }
+  }
+  return i;
+}
+
+const swap = (arr, i, j) => {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+  quickSwapsCount++
 }
 
 export const resetArrays = () => {
@@ -124,3 +151,4 @@ export const resetArrays = () => {
    meregeComparitionCount = 0;
    insertComparitionCount = 0;
 }
+

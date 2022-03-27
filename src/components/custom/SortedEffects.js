@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import { Box, Button,Paper } from '@mui/material';
 import { RadioBtns } from './RadioBtns'
-import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSort,stepsForQuick,quickSwapsCount,meregeSwapsCount,insertSwapsCount,quickComparitionCount,meregeComparitionCount,insertComparitionCount } from "../../utils/sortedMethod";
+import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSortWrap,stepsForQuick,quickSwapsCount,meregeSwapsCount,insertSwapsCount,quickComparitionCount,meregeComparitionCount,insertComparitionCount } from "../../utils/sortedMethod";
 import SortDispaly from '../custom/SortDisplay'
 import Slider from '@mui/material/Slider';
 import {randomGenerator,ascGenerator,descGenerator} from '../../utils/numGenerator';
@@ -41,7 +41,7 @@ export default function SortedEffects() {
     useEffect(() =>{
       setMergeSortArray(mergeSort(startArray))
       setInSort(insertionSort(startArray))
-      setQuickSortArray(quickSort(startArray))  
+      setQuickSortArray(quickSortWrap(startArray))  
     }, [startArray])
 
   return (
