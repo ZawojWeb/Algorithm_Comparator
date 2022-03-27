@@ -7,7 +7,7 @@ import { Box, Button } from '@mui/material';
 import {Chart2} from '../widgets/charts/chart-2'
 import SortDispaly from '../custom/SortDisplay'
 import Slider from '@mui/material/Slider';
-import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSort,stepsForQuick } from "../../utils/sortedMethod";
+import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSort,stepsForQuick,quickSwapsCount,meregeSwapsCount,insertSwapsCount,quickComparitionCount,meregeComparitionCount,insertComparitionCount } from "../../utils/sortedMethod";
 import { RadioBtns } from './RadioBtns'
 
 function TabPanel(props) {
@@ -79,7 +79,7 @@ export default function BasicTabs() {
       generateStartArray = generateStartArray.reverse()
     }else{
       for (let i = 0; i < items; i++) {
-        generateStartArray[i] = Math.floor(Math.random()* 1000000)    
+        generateStartArray[i] = Math.floor(Math.random()* 1000)    
       }
     }
     setStartArray(generateStartArray)
@@ -123,9 +123,9 @@ export default function BasicTabs() {
               alignItems: "start"
             }}
           >
-              <SortDispaly key='quick' sortName={"Quick Sort"} buttonShow={true} array={quickSortArray} steps={stepsForQuick}/>
-              <SortDispaly key='merege' sortName={"Merage Sort"}buttonShow={true} array={mergeSortArray} steps={stepsForMerg}/>
-              <SortDispaly key='insort' sortName={"Insertion Sort"}buttonShow={true} array={inSort}/>
+              <SortDispaly key='quick' sortName={"Quick Sort"} buttonShow={true} array={quickSortArray} steps={stepsForQuick} countCompare={quickComparitionCount} countSwaps={quickSwapsCount}/>
+              <SortDispaly key='merege' sortName={"Merage Sort"}buttonShow={true} array={mergeSortArray} steps={stepsForMerg} countCompare={meregeComparitionCount} countSwaps={meregeSwapsCount}/>
+              <SortDispaly key='insort' sortName={"Insertion Sort"}buttonShow={true} array={inSort} countCompare={insertComparitionCount} countSwaps={insertSwapsCount}/>
           </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>

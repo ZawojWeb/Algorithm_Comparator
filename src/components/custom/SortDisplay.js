@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { Box, Button,Paper } from '@mui/material';
 import {AllSteps} from '../custom/allSteps'
 
-export default function SortDispaly({sortName,buttonShow,array,steps}) {
+export default function SortDispaly({sortName,buttonShow,array,steps,countCompare,countSwaps}) {
  const [showSteps, setShowSteps] = useState(false);
   return (
     <Box sx={{ width: '100%' }}>
@@ -37,6 +37,22 @@ export default function SortDispaly({sortName,buttonShow,array,steps}) {
                           >
                           {sortName}
                           </Typography>
+                          {countCompare != null && (
+                            <Typography
+                            color="textPrimary"
+                            sx={{fontSize:"10px"}}
+                            >
+                              Count of Compare: {countCompare}
+                            </Typography>
+                          )}
+                         {countSwaps  != null && (
+                            <Typography
+                            color="textPrimary"
+                            sx={{fontSize:"10px"}}
+                            >
+                              Count of Swaps: {countSwaps}
+                            </Typography>
+                          )}
                       </Box>
                       <Box>       
                       <Typography sx={{ fontSize: 20,wordWrap: "break-word", textAlign: "center", padding: "10px" }} color="text.primary" gutterBottom>
