@@ -1,1 +1,1 @@
-[View Demo]('https://algorithm-comparator.vercel.app/')
+<a href="https://algorithm-comparator.vercel.app/">View Demo</a>
