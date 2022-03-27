@@ -1,3 +1,9 @@
+export let stepsForInser = []
+export let stepsForQuick = []
+export let stepsForMerg = []
+let merageHelper = 0
+let QuickHelper = 0
+
 export const insertionSort = (array) => {
     const list = [...array]
     for (let i = 1; i < list.length; i++) {
@@ -12,22 +18,8 @@ export const insertionSort = (array) => {
     return list
 }
 
-export const quickSort = (array) => {
-    const list = [...array]
-  
-    if (list.length < 2) {
-      return list
-    }
-  
-    const pivot = list[0]
-  
-    const smaller = list.filter((item) => item < pivot)
-    const bigger = list.filter((item) => item > pivot)
-  
-    return [...quickSort(smaller), pivot, ...quickSort(bigger)]
-}
-
 export const mergeSort = array =>{
+  
   if (array.length <= 1) {
     return array
   }
@@ -56,6 +48,40 @@ const mergeArr = (leftArr, rightArr) =>{
       rightIndex++;
     }
   }
-  console.log(...output, ...leftArr.slice(leftIndex), ...rightArr.slice(rightIndex));
+  if(output.length > merageHelper){
+    stepsForMerg.push(output);
+    merageHelper = output.length
+  }
   return [...output, ...leftArr.slice(leftIndex), ...rightArr.slice(rightIndex)]
+}
+
+export const quickSort = (arr) => {
+  let tempArr = [...arr]
+  
+  if (arr.length <= 1) { 
+		return arr;
+	} 
+
+	let left = [];
+	let right = [];
+	let newArray = [];
+	let pivot = tempArr.pop();
+	let length = tempArr.length;
+	for (var i = 0; i < length; i++) {
+		if (tempArr[i] <= pivot) {
+			left.push(tempArr[i]);
+		} else {
+			right.push(tempArr[i]);
+		}
+	}
+	return newArray.concat(quickSort(left), pivot, quickSort(right));
+
+}
+
+export const resetArrays = () => {
+   stepsForInser.length = 0
+   stepsForQuick.length = 0
+   stepsForMerg.length = 0
+   merageHelper = 0
+   QuickHelper = 0
 }
