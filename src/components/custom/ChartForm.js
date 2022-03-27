@@ -77,9 +77,9 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
                 onChange={(e) => setTypeOfChart(e.target.value)}
                 required
             >
-                <MenuItem value={1}>średnią liczbę wykonanych porównań (c) w zależności od n,</MenuItem>
-                <MenuItem value={2}>średnią liczbę przestawień kluczy (s) w zależności od n,</MenuItem>
-                <MenuItem value={3}>iloraz c/n w zależności od n,</MenuItem>
+                <MenuItem value={1}>średnią liczbę wykonanych porównań (c) w zależności od n</MenuItem>
+                <MenuItem value={2}>średnią liczbę przestawień kluczy (s) w zależności od n</MenuItem>
+                <MenuItem value={3}>iloraz c/n w zależności od n</MenuItem>
                 <MenuItem value={4}>iloraz s/n w zależności od n.</MenuItem>
             </Select>
             </Grid>

@@ -1,8 +1,9 @@
+import {useEffect, useState} from 'react';
 import { Box, Card, CardContent, CardHeader } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Chart } from '../../chart';
 
-export const Chart2 = ({data}) => {
+export const Chart2 = ({data,titleChart}) => {
   const theme = useTheme();
 
   const chartOptions = {
@@ -110,6 +111,9 @@ export const Chart2 = ({data}) => {
     
   ];
 
+ 
+
+
 
   return (
     <Box
@@ -119,7 +123,7 @@ export const Chart2 = ({data}) => {
       }}
     >
       <Card>
-        <CardHeader title="Chart" />
+        <CardHeader title={titleChart} />
         <CardContent>
           <Chart
             height={500}

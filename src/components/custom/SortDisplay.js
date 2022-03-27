@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import { Box, Button,Paper } from '@mui/material';
-import {AllSteps} from '../custom/allSteps'
+import {AllSteps} from './AllSteps'
 
 export default function SortDispaly({sortName,buttonShow,array,steps,countCompare,countSwaps}) {
  const [showSteps, setShowSteps] = useState(false);
