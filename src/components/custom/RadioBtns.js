@@ -2,7 +2,7 @@ import { Box, FormControlLabel, Paper, Radio, RadioGroup, Typography } from '@mu
 
 const typeOptions = [
   {
-    title: 'Radnom Array',
+    title: 'Random Array',
     value: 'random'
   },
   {
