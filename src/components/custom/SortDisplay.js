@@ -33,14 +33,14 @@ export default function SortDispaly({sortName,buttonShow,array,steps,countCompar
                       <Box sx={{ p: 2 }}>
                           <Typography
                           color="textPrimary"
-                          variant="h6"
+                          variant="h4"
                           >
                           {sortName}
                           </Typography>
                           {countCompare != null && (
                             <Typography
                             color="textPrimary"
-                            sx={{fontSize:"10px"}}
+                            sx={{fontSize:"12px"}}
                             >
                               Count of Compare: {countCompare}
                             </Typography>
@@ -48,7 +48,7 @@ export default function SortDispaly({sortName,buttonShow,array,steps,countCompar
                          {countSwaps  != null && (
                             <Typography
                             color="textPrimary"
-                            sx={{fontSize:"10px"}}
+                            sx={{fontSize:"12px"}}
                             >
                               Count of Swaps: {countSwaps}
                             </Typography>

@@ -2,7 +2,7 @@ import { Box, Card, CardContent, CardHeader } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Chart } from '../../chart';
 
-export const Chart2 = () => {
+export const Chart2 = ({data}) => {
   const theme = useTheme();
 
   const chartOptions = {
@@ -13,7 +13,7 @@ export const Chart2 = () => {
         show: false
       }
     },
-    colors: ['#1f87e6', '#ff5c7c'],
+    colors: ['#1f87e6', '#ff5c7c','#27f6db'],
     dataLabels: {
       enabled: false
     },
@@ -44,14 +44,8 @@ export const Chart2 = () => {
       radius: 2,
       shape: 'circle',
       size: 4,
-      strokeColors: ['#1f87e6', '#27c6db'],
+      strokeColors: ['#1f87e6', '#ff5c7c','#27f6db'],
       strokeWidth: 0
-    },
-    stroke: {
-      curve: 'smooth',
-      dashArray: [0, 3],
-      lineCap: 'butt',
-      width: 3
     },
     theme: {
       mode: theme.palette.mode
@@ -82,8 +76,7 @@ export const Chart2 = () => {
         }
       }
     },
-    yaxis: [
-      {
+    yaxis: {
         axisBorder: {
           color: theme.palette.divider,
           show: true
@@ -98,47 +91,25 @@ export const Chart2 = () => {
           }
         }
       },
-      {
-        axisTicks: {
-          color: theme.palette.divider,
-          show: true
-        },
-        axisBorder: {
-          color: theme.palette.divider,
-          show: true
-        },
-        labels: {
-          style: {
-            colors: theme.palette.text.secondary
-          }
-        },
-        opposite: true
-      }
-    ]
+    
   };
 
   const chartSeries = [
     {
-      data: [
-        3350,
-        1840,
-        2254,
-        5780,
-        9349,
-        5241,
-        2770,
-        2051,
-        3764,
-        2385
-
-      ],
+      data: {...data[0]}[0],
       name: 'Qucik Sort'
     },
     {
-      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51],
+      data: {...data[1]}[0],
+      name: 'Merage Sort'
+    },
+    {
+      data: {...data[2]}[0],
       name: 'Insertion Sort'
     }
+    
   ];
+
 
   return (
     <Box
@@ -148,10 +119,10 @@ export const Chart2 = () => {
       }}
     >
       <Card>
-        <CardHeader title="Widget25" />
+        <CardHeader title="Chart" />
         <CardContent>
           <Chart
-            height={300}
+            height={500}
             options={chartOptions}
             series={chartSeries}
             type="line"
