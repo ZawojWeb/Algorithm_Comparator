@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import ChartDisplay from './ChartDisaply'
 import { Box, Button } from '@mui/material';
 import SortedEffects from './SortedEffects'
-
+import NextLink from 'next/link'
 
 
 function TabPanel(props) {
@@ -72,12 +72,14 @@ export default function BasicTabs() {
               alignItems: "center"
             }}
           >
-            <Button
-              size="small"
-              variant="contained"
-            >
-              SOURCE CODE
-            </Button>
+            <NextLink href='https://github.com/ZawojWeb/Algorithm_Comparator/tree/main/src/utils' passHref>
+              <Button
+                size="small"
+                variant="contained"
+              >
+                SOURCE CODE
+              </Button>
+            </NextLink>
           </Box>
       </TabPanel>
 

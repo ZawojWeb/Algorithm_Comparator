@@ -11,7 +11,8 @@ export const AllSteps = ({allSteps}) =>{
                 sx={{
                     maxWidth: 400,
                     mx: 'auto'
-                }}  
+                }}
+                key={Step}  
                 >
                 <Box sx={{ p: 2 }}>
                 </Box>
