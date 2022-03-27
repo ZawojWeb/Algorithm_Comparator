@@ -6,6 +6,7 @@ import { RadioBtns } from './RadioBtns'
 import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSort,stepsForQuick,quickSwapsCount,meregeSwapsCount,insertSwapsCount,quickComparitionCount,meregeComparitionCount,insertComparitionCount } from "../../utils/sortedMethod";
 import SortDispaly from '../custom/SortDisplay'
 import Slider from '@mui/material/Slider';
+import {randomGenerator,ascGenerator,descGenerator} from '../../utils/numGenerator';
 
 export default function SortedEffects() {
 
@@ -24,25 +25,15 @@ export default function SortedEffects() {
       setStartArray(generateStartArray)
     },[])
   
-  
-  
     useEffect(() =>{
       generateStartArray.length = 0
       resetArrays()
       if(typeOfStartArr == 'asc'){
-        for (let i = 0; i < items; i++) {
-          generateStartArray[i] = i
-        }
+        generateStartArray = ascGenerator(items)
       }else if(typeOfStartArr == 'desc'){
-        console.log(startArray);
-        for (let i = 0; i < items; i++) {
-          generateStartArray[i] = i
-        }
-        generateStartArray = generateStartArray.reverse()
+        generateStartArray = descGenerator(items)
       }else{
-        for (let i = 0; i < items; i++) {
-          generateStartArray[i] = Math.floor(Math.random()* 1000000)    
-        }
+        generateStartArray = randomGenerator(items)
       }
       setStartArray(generateStartArray)
     },[items,typeOfStartArr])

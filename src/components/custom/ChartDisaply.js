@@ -9,7 +9,7 @@ import {avgComparitions,avgSwaps,avgComparitionsDiv,avgSwapsDiv} from '../../uti
 export default function ChartDisaply() {
   const [howManyRepeats, setHowManyRepeats] = useState(1)
   const [typeOfChart, setTypeOfChart] = useState(1)
-  const [whichAlgo, setWhichAlgo] = useState([true,true,true])
+  const [whichAlgo, setWhichAlgo] = useState([true,true,true,false,false])
   const [data, SetData] = useState([])
   const [title, setTitle] = useState('')
   
@@ -30,6 +30,9 @@ export default function ChartDisaply() {
         break;
       case 4:
         SetData(avgSwapsDiv(whichAlgo, howManyRepeats));
+        break;
+      case 5:
+        console.log('5')
         break;
       default:
         break;
@@ -59,7 +62,7 @@ export default function ChartDisaply() {
       <Box >
       <ChartForm howManyRepeats={howManyRepeats} setHowManyRepeats={setHowManyRepeats} typeOfChart={typeOfChart} setTypeOfChart={setTypeOfChart} whichAlgo={whichAlgo} setWhichAlgo={setWhichAlgo} generateChart={generateChart}/>
       </Box>
-     {data.length > 0 &&  <Chart2 data={data} titleChart={title}/>}
+     {data.length > 0 &&  <Chart2 data={data} titleChart={title} whichAlgo={whichAlgo}/>}
     </Box>
   );
 }

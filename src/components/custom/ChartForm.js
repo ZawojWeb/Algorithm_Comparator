@@ -1,30 +1,37 @@
 import { Box, Button, Divider, Grid, TextField,Autocomplete,InputLabel,Select,MenuItem,Checkbox,FormControlLabel } from '@mui/material';
 import {useEffect, useState} from 'react';
 
-
 export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeOfChart,whichAlgo,setWhichAlgo,generateChart}) =>{ 
 
     const handleChange1 = (event) => {
-        setWhichAlgo([event.target.checked, event.target.checked,event.target.checked]);
+        setWhichAlgo([event.target.checked, event.target.checked,event.target.checked, event.target.checked, event.target.checked]);
       };
     
     const handleChange2 = (event) => {
-        setWhichAlgo([event.target.checked,whichAlgo[1],whichAlgo[2]]);
+        setWhichAlgo([event.target.checked,whichAlgo[1],whichAlgo[2], whichAlgo[3], whichAlgo[4]]);
     };
 
     const handleChange3 = (event) => {
-        setWhichAlgo([whichAlgo[0],event.target.checked, whichAlgo[2]]);
+        setWhichAlgo([whichAlgo[0],event.target.checked, whichAlgo[2], whichAlgo[3], whichAlgo[4]]);
     };
 
     const handleChange4 = (event) => {
-        setWhichAlgo([whichAlgo[0] ,whichAlgo[1], event.target.checked]);
+        setWhichAlgo([whichAlgo[0] ,whichAlgo[1], event.target.checked, whichAlgo[3], whichAlgo[4]]);
+    };
+
+    const handleChange5 = (event) => {
+        setWhichAlgo([whichAlgo[0] ,whichAlgo[1], whichAlgo[2], event.target.checked, whichAlgo[4]]);
+    };
+
+    const handleChange6 = (event) => {
+        setWhichAlgo([whichAlgo[0] ,whichAlgo[1], whichAlgo[2], whichAlgo[3], event.target.checked]);
     };
 
     useEffect(() => {
-        if(howManyRepeats > 25){
-            setWhichAlgo([whichAlgo[0] ,whichAlgo[1], false]);
-        }
-    },[howManyRepeats])
+       if(howManyRepeats > 25){
+            setWhichAlgo([whichAlgo[0] ,whichAlgo[1], false, whichAlgo[3], whichAlgo[4]]);
+        } 
+    },[howManyRepeats,typeOfChart])
 
   return(
     <Box
@@ -81,6 +88,7 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
                 <MenuItem value={2}>średnią liczbę przestawień kluczy (s) w zależności od n</MenuItem>
                 <MenuItem value={3}>iloraz c/n w zależności od n</MenuItem>
                 <MenuItem value={4}>iloraz s/n w zależności od n.</MenuItem>
+                <MenuItem value={5}>quickSort vs dualPivotQuicksort</MenuItem>
             </Select>
             </Grid>
               <Grid
@@ -93,10 +101,10 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
                     label="All"
                     control={
                     <Checkbox
-                        checked={whichAlgo[0] && whichAlgo[1] && whichAlgo[2]}
+                        checked={whichAlgo[0] && whichAlgo[1] && whichAlgo[2] && whichAlgo[3] && whichAlgo[4]}
                         indeterminate={whichAlgo[0] !== whichAlgo[1] && whichAlgo[1] !== whichAlgo[2]}
                         onChange={handleChange1}
-                        disabled={howManyRepeats <= 25 ? false : true}
+                        disabled={howManyRepeats > 25}
                     />
                     }
                 />
@@ -111,7 +119,15 @@ export const ChartForm = ({howManyRepeats,setHowManyRepeats,typeOfChart,setTypeO
                     />
                     <FormControlLabel
                         label="Insert Sort"
-                        control={<Checkbox checked={whichAlgo[2]} onChange={handleChange4} disabled={howManyRepeats <= 25 ? false : true} />}
+                        control={<Checkbox checked={whichAlgo[2]} onChange={handleChange4} disabled={howManyRepeats > 25} />}
+                    />
+                    <FormControlLabel
+                        label="Dual Pivot Quick Sort"
+                        control={<Checkbox checked={whichAlgo[3]} onChange={handleChange5} />}
+                    />
+                    <FormControlLabel
+                        label="Hybrid"
+                        control={<Checkbox checked={whichAlgo[4]} onChange={handleChange6}/>}
                     />
                  </Box>
               </Grid>

@@ -3,8 +3,27 @@ import { Box, Card, CardContent, CardHeader } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Chart } from '../../chart';
 
-export const Chart2 = ({data,titleChart}) => {
+
+// Random color in hex format
+const randomColor = () => {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+export const Chart2 = ({data,titleChart,whichAlgo}) => {
   const theme = useTheme();
+  const chartSeries = [];
+  let colors = [];
+
+  for (let i = 0; i < whichAlgo.length; i++) {
+    if(whichAlgo[i] ==true){
+      colors.push(randomColor());
+    }
+  }
 
   const chartOptions = {
     chart: {
@@ -14,7 +33,7 @@ export const Chart2 = ({data,titleChart}) => {
         show: false
       }
     },
-    colors: ['#1f87e6', '#ff5c7c','#27f6db'],
+    colors: [...colors],
     dataLabels: {
       enabled: false
     },
@@ -45,7 +64,7 @@ export const Chart2 = ({data,titleChart}) => {
       radius: 2,
       shape: 'circle',
       size: 4,
-      strokeColors: ['#1f87e6', '#ff5c7c','#27f6db'],
+      strokeColors: [...colors],
       strokeWidth: 0
     },
     theme: {
@@ -95,25 +114,40 @@ export const Chart2 = ({data,titleChart}) => {
     
   };
 
-  const chartSeries = [
-    {
+  if(whichAlgo[0] ==true){
+    chartSeries.push({
       data: {...data[0]}[0],
       name: 'Qucik Sort'
-    },
-    {
+    })
+  }
+
+  if(whichAlgo[1] ==true){
+    chartSeries.push({
       data: {...data[1]}[0],
       name: 'Merage Sort'
-    },
-    {
+    })
+  }
+
+  if(whichAlgo[2] ==true){
+    chartSeries.push({
       data: {...data[2]}[0],
       name: 'Insertion Sort'
-    }
-    
-  ];
+    })
+  }
 
- 
+  if(whichAlgo[3] ==true){
+    chartSeries.push({
+      data: {...data[3]}[0],
+      name: 'Dual Pivot Quick Sort'
+    })
+  }
 
-
+  if(whichAlgo[4] ==true){
+    chartSeries.push({
+      data: {...data[4]}[0],
+      name: 'Hybrid'
+    })
+  }
 
   return (
     <Box
