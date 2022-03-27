@@ -7,7 +7,9 @@ import { Box, Button } from '@mui/material';
 import {Chart2} from '../widgets/charts/chart-2'
 import SortDispaly from '../custom/SortDisplay'
 import Slider from '@mui/material/Slider';
-import { insertionSort,quickSort,mergeSort,countOfSwaps,countOfComparison } from "../../utils/sortedMethod";
+import { insertionSort,mergeSort,stepsForMerg,resetArrays,quickSort,stepsForQuick } from "../../utils/sortedMethod";
+import { RadioBtns } from './RadioBtns'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -43,9 +45,10 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = useState(0)
-  const [items, setItems] = useState(50)
-  let generateRandomArray = []
-  const [randomArray , setRandomArray] = useState([])
+  const [items, setItems] = useState(10)
+  const [typeOfStartArr, setTypeOfStartArr] = useState('random')
+  let generateStartArray = []
+  const [startArray , setStartArray] = useState([])
   const [quickSortArray , setQuickSortArray] = useState([])
   const [mergeSortArray , setMergeSortArray] = useState([])
   const [inSort, setInSort] = useState([])
@@ -53,30 +56,41 @@ export default function BasicTabs() {
     setValue(newValue);
   };
   useEffect(() =>{
-    for (let i = 0; i < 50; i++) {
-        generateRandomArray[i] = Math.floor(Math.random()* 1000000)    
+    for (let i = 0; i <= 10; i++) {
+      generateStartArray[i] = Math.floor(Math.random()* 1000000)    
     }   
-    setRandomArray(generateRandomArray)
+    setStartArray(generateStartArray)
   },[])
 
 
 
   useEffect(() =>{
-    for (let i = 0; i < items; i++) {
-        generateRandomArray[i] = Math.floor(Math.random()* 1000000)    
+    generateStartArray.length = 0
+    resetArrays()
+    if(typeOfStartArr == 'asc'){
+      for (let i = 0; i < items; i++) {
+        generateStartArray[i] = i
+      }
+    }else if(typeOfStartArr == 'desc'){
+      console.log(startArray);
+      for (let i = 0; i < items; i++) {
+        generateStartArray[i] = i
+      }
+      generateStartArray = generateStartArray.reverse()
+    }else{
+      for (let i = 0; i < items; i++) {
+        generateStartArray[i] = Math.floor(Math.random()* 1000000)    
+      }
     }
-    setRandomArray(generateRandomArray)
-  },[items])
+    setStartArray(generateStartArray)
+  },[items,typeOfStartArr])
 
   useEffect(() =>{
-    setQuickSortArray(quickSort(randomArray))
-    setMergeSortArray(mergeSort(randomArray))
-    setInSort(insertionSort(randomArray))
-  }, [randomArray])
+    setMergeSortArray(mergeSort(startArray))
+    setInSort(insertionSort(startArray))
+    setQuickSortArray(quickSort(startArray))  
+  }, [startArray])
  
-
-   
-  useEffect
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -88,10 +102,11 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-      <Box sx={{ width: 300, marginLeft:'auto', marginRight:'auto' }}>
+      <Box sx={{ marginLeft:'auto', marginRight:'auto' }}>
+            <RadioBtns typeOfStartArr={typeOfStartArr} setTypeOfStartArr={setTypeOfStartArr}/>
             <Slider
                 aria-label="Temperature"
-                defaultValue={50}
+                defaultValue={10}
                 valueLabelDisplay="auto"
                 getAriaValueText={e => setItems(e)}
                 step={10}
@@ -100,17 +115,17 @@ export default function BasicTabs() {
                 max={200}
             />
         </Box>
-        <SortDispaly sortName={"Started Array"} buttonShow={false} array={randomArray}/>
+        <SortDispaly key='random' sortName={"Started Array"} buttonShow={false} array={startArray}/>
         <Box
             sx={{
               display:"flex",
-              justifyContent: "center", 
-              alignItems: "center"
+              justifyContent: "start", 
+              alignItems: "start"
             }}
           >
-              <SortDispaly sortName={"Quick Sort"} buttonShow={true} array={quickSortArray}/>
-              <SortDispaly sortName={"Merage Sort"}buttonShow={true} array={mergeSortArray}/>
-              <SortDispaly sortName={"Insertion Sort"}buttonShow={true} array={inSort}/>
+              <SortDispaly key='quick' sortName={"Quick Sort"} buttonShow={true} array={quickSortArray} steps={stepsForQuick}/>
+              <SortDispaly key='merege' sortName={"Merage Sort"}buttonShow={true} array={mergeSortArray} steps={stepsForMerg}/>
+              <SortDispaly key='insort' sortName={"Insertion Sort"}buttonShow={true} array={inSort}/>
           </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -130,9 +145,9 @@ export default function BasicTabs() {
             >
               SOURCE CODE
             </Button>
-           
           </Box>
       </TabPanel>
+
     </Box>
   );
 }
